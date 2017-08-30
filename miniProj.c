@@ -22,7 +22,7 @@ struct processList{
 };
 typedef struct processList ProcessList;
 
-//tesT
+
 
 void insertProcess(ProcessList **head,char *command,int PID)
 {
