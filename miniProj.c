@@ -19,21 +19,20 @@ struct processList{
     int PID;
     char *command;
     struct processList *next;
-};
+}*head=NULL;
 typedef struct processList ProcessList;
-
 
 
 void insertProcess(ProcessList **head,char *command,int PID)
 {
-    printf("debug1\n");
+   // printf("debug1\n");
     ProcessList *link = (ProcessList *) malloc(sizeof(ProcessList));
     link->command=(char *) malloc(sizeof(char) * (strlen(command)+1));
-     printf("%s\n",command);
+   //  printf("%s\n",command);
     strcpy(link->command,command);
-     printf("debug1\n");
+   //  printf("debug1\n");
     link->PID=PID;
-     printf("debug1\n");
+   //  printf("debug1\n");
     link->next=*head;
     *head=link;
 }
@@ -41,9 +40,9 @@ void insertProcess(ProcessList **head,char *command,int PID)
 
 void printList(ProcessList *node){
     int count=0;
-    printf("Command\tPID\t\n");
+    printf("\e[38;2;255;0;0m\tCommand\tPID\t\n\e[0m");
     while(node!=NULL){
-        printf("The count is %d\n",count);
+     //   printf("The count is %d\n",count);
         printf("%s\t%d\t\n",node->command,node->PID);
         node=node->next;
     }
@@ -69,7 +68,7 @@ int main(){
         s[i].command=(char *)malloc(sizeof(char)*MAX_LEN_APPS);
         scanf("%s",s[i].command);
     }
-     printf("hello %d",j++);
+    // printf("hello %d",j++);
     // printf("enter the number of commands");
     for(i=0;i<numberOfApps;i++){
         s[i].arglist=(char **)malloc(sizeof(char *) * 10);
@@ -103,37 +102,40 @@ int spawn (char* program, char** arg_list)
 void theBeginning(int N){
 
     int status,i,ret;
+    char *PID=(char *) malloc(sizeof(char) * 10);
     //for(i=0;i<2;i++)
     //  printf("%s",s[0].arglist[i]);
-    ProcessList *head = NULL;
+    //ProcessList *head = NULL;
     
-    //char *choice =(char *)malloc(sizeof(char)*MAX_LEN_APPS);
-    char choice[8];
+    char *choice =(char *)malloc(sizeof(char)*MAX_LEN_APPS);
+    //char choice[20];
     printf("What do you want to do next? ");
-    scanf("%s",choice);
-    printf("hello\n");
-    if(strcmp(choice,"exit") ==0 )
+    fgets(choice,10,stdin);
+   // printf("hello\n");
+    if(strstr(choice,"exit") !=0 )
         return ;
-    if(strcmp(choice,"list") ==0 ){
-    //    printList(head);
-        system("ps");
+    if(strstr(choice,"list") !=0 ){
+        printList(head);    
     }
-    if(strcmp(choice,"clear") == 0){
+    if(strstr(choice,"clear") != 0)
         foobar();
+    if(strstr(choice,"kill") != 0){
+        printf("kill it");
+        printf("%s\n", choice + 5 );
     }
-    printf("debug");   
+   // printf("debug");   
     // if(strstr(choice,"kill") != 0 );
     for(i=0;i<N;i++){
-        printf("hello\n");
-        printf("%s\n",s[i].command);
-        if(strcmp(choice,s[i].command)==0){
-            printf("hi1");
+     //   printf("hello\n");
+     //   printf("%s\n",s[i].command);
+        if(strstr(choice,s[i].command)!=0){
+       //     printf("hi1");
             // s[i].
             ret=spawn(s[i].command,s[i].arglist);
-            printf("after spawn\n");
+         //   printf("after spawn\n");
             insertProcess(&head,s[i].command,ret);
-            printList(head);
-            printf("%d\n",ret);
+           // printList(head);
+        //    printf("%d\n",ret);
             //char *arglist[]={"vlc","Dhuruvangal Pathinaaru - Uthira Kaayangal Song Making with Lyrics - Jakes Bejoy - Karthick Naren.mp3","&",NULL};
         }
         //  printf("It is done");
