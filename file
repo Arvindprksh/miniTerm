@@ -1,0 +1,68 @@
+[0000000002207148] core libvlc: Running vlc with the default interface. Use 'cvlc' to use vlc without interface.
+QObject::~QObject: Timers cannot be stopped from another thread
+s
+
+11691 pts/2    00:00:00 ps
+closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1504557607897	addons.update-checker	WARN	Update manifest for e10srollout@mozilla.org did not contain an updates property
+1504557607929	addons.update-checker	WARN	Update manifest for webcompat@mozilla.org did not contain an updates property
+1504557608137	addons.update-checker	WARN	Update manifest for firefox@getpocket.com did not contain an updates property
+1504557608151	addons.update-checker	WARN	Update manifest for aushelper@mozilla.org did not contain an updates property
+1504557608165	addons.update-checker	WARN	Update manifest for clicktoplay-rollout@mozilla.org did not contain an updates property
+1504557608210	addons.update-checker	WARN	Update manifest for {972ce4c6-7e08-4474-a285-3208198ce6fd} did not contain an updates property
+1504557608449	addons.update-checker	WARN	Update manifest for followonsearch@mozilla.com did not contain an updates property
+1504557610146	addons.xpi	ERROR	Failed to clean updated system add-ons directories.
+[Parent 10325] WARNING: pipe error (130): Connection reset by peer: file /build/firefox-S0wyi8/firefox-55.0.2+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 353
+console.warn: SDK worker-child started as frozen on unexpected initial document.readyState {"initialDocumentReadyState":"uninitialized","windowLocation":"about:blank"}
+console.error: nightmodepro: 
+  Message: TypeError: tab is undefined
+  Stack:
+    getBrowserForTab@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/tabs/utils.js:199:1
+browser@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/tabs/tab-firefox.js:34:10
+listener@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/tabs/tab-firefox.js:217:35
+emitOnObject@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:110:7
+emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:86:38
+attachItem@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/remote/utils.js:27:5
+setFrameProcess@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/remote/parent.js:159:3
+frameAttached@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/remote/parent.js:291:5
+
+console.error: nightmodepro: 
+  Message: TypeError: tab is undefined
+  Stack:
+    getBrowserForTab@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/tabs/utils.js:199:1
+browser@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/tabs/tab-firefox.js:34:10
+listener@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/tabs/tab-firefox.js:217:35
+emitOnObject@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:110:7
+emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:86:38
+attachItem@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/remote/utils.js:27:5
+setFrameProcess@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/remote/parent.js:159:3
+frameAttached@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/remote/parent.js:291:5
+
+console.error: nightmodepro: 
+  Message: TypeError: tab is undefined
+  Stack:
+    getBrowserForTab@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/tabs/utils.js:199:1
+browser@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/tabs/tab-firefox.js:34:10
+listener@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/tabs/tab-firefox.js:217:35
+emitOnObject@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:110:7
+emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:86:38
+attachItem@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/remote/utils.js:27:5
+setFrameProcess@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/remote/parent.js:159:3
+frameAttached@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/remote/parent.js:291:5
+
+console.error: nightmodepro: 
+  Message: TypeError: tab is undefined
+  Stack:
+    getBrowserForTab@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/tabs/utils.js:199:1
+browser@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/tabs/tab-firefox.js:34:10
+listener@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/tabs/tab-firefox.js:217:35
+emitOnObject@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:110:7
+emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:86:38
+attachItem@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/remote/utils.js:27:5
+setFrameProcess@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/remote/parent.js:159:3
+frameAttached@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/remote/parent.js:291:5
+

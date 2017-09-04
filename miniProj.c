@@ -3,11 +3,19 @@
 #include<unistd.h>
 #include<sys/wait.h>
 #include<string.h>
+#include<fcntl.h>
 #include<signal.h>
 #define MAX_APPS 10
 #define MAX_LEN_APPS 20
 int spawn(char * , char **);
 void theBeginning(int);
+
+
+
+
+sig_atomic_t child_exit_status;
+
+
 
 struct process{
     char *command;
@@ -37,25 +45,45 @@ void printList(ProcessList *node){
     int count=0;
     printf("\e[38;2;255;0;0mCommand\tPID\t\n\e[0m");
     while(node!=NULL){
-        printf("%s\t%d\t\n",node->command,node->PID);
+        if(!kill(node->PID,0))
+            printf("%s\t%d\t\n",node->command,node->PID);
         node=node->next;
     }
 }
 
 
+
 void foobar(){}
+
+void clean_up_child_process (int signal_number)
+{
+    /* Clean up the child process. */
+    int status;
+    wait (&status);
+    /* Store its exit status in a global variable.*/
+    child_exit_status = status;
+}
 
 int spawn (char* program, char** arg_list)
 {
     pid_t child_pid;
     int i;
-
+           
+    
     child_pid = fork (); 
-    if (child_pid != 0)
+    if (child_pid != 0){
+        struct sigaction sigchld_action;
+        memset (&sigchld_action, 0, sizeof (sigchld_action));
+        sigchld_action.sa_handler = &clean_up_child_process;
+        sigaction (SIGCHLD, &sigchld_action, NULL);
         return child_pid;
+    }
     else {
+        int fd = open("file", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+        dup2(fd,1);
+        dup2(fd,2);
         execvp (program, arg_list);
-        fprintf (stderr, "There is an error \n");
+       // fprintf (stderr, "There is an error \n");
         abort (); 
     }   
 }
@@ -66,7 +94,7 @@ void wrapperForKill(int pid,ProcessList **head){
     temp= *head;
     ProcessList *prev=NULL;
     if(temp != NULL && temp->PID ==pid){
-        kill(pid,SIGTERM);
+        kill(pid,SIGKILL);
         *head = temp->next;
         free(temp);
         return ;
@@ -95,13 +123,15 @@ void theBeginning(int N){
     fflush(stdout);
    // scanf("%s",choice);
     fgets(choice,20,stdin);
-
+    
     if(strstr(choice,"exit") !=0 ){
       //  printf("debug\n");
-        flag++;
+        flag++;                     //the flag is to check if the entered command is valid or not
         return;
     }
     if(strstr(choice,"list") !=0 ){
+        char *tempArgList[]={"ps",NULL};
+       // ret=spawn("ps",tempArgList);
         printList(head); 
         flag++;
     }
@@ -111,6 +141,9 @@ void theBeginning(int N){
         flag++;
         wrapperForKill(atoi(choice+5),&head);
     }
+    if(strstr(choice,"\n") != 0){
+        flag++;
+}
     for(i=0;i<N;i++){
         if(strstr(choice,s[i].command)!=0){
             ret=spawn(s[i].command,s[i].arglist);
