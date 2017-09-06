@@ -1,4 +1,4 @@
-[0000000002207148] core libvlc: Running vlc with the default interface. Use 'cvlc' to use vlc without interface.
+[0000000000a5b148] core libvlc: Running vlc with the default interface. Use 'cvlc' to use vlc without interface.
 QObject::~QObject: Timers cannot be stopped from another thread
 s
 

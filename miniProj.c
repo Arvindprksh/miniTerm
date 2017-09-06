@@ -8,7 +8,7 @@
 #define MAX_APPS 10
 #define MAX_LEN_APPS 20
 int spawn(char * , char **);
-void theBeginning(int);
+void theBeginning();
 
 
 
@@ -110,20 +110,22 @@ void wrapperForKill(int pid,ProcessList **head){
     free(temp);
 }
 
-void theBeginning(int N){
+void theBeginning(){
 
-    int status,i,ret;
+    int status,i,ret,count;
     int flag=0,child_status;
     static int skip;
     char *PID=(char *) malloc(sizeof(char) * 10);
     char *choice =(char *)malloc(sizeof(char)*MAX_LEN_APPS);
+    char *arglist[]=(char **)malloc(sizeof(char * ) * 5);
     strcpy(choice,"");
     //char choice[20];
     printf("\e[38;2;241;196;15mWhat do you want to do next?\e[0m"); //rgb(241, 196, 15)
     fflush(stdout);
    // scanf("%s",choice);
     fgets(choice,20,stdin);
-    
+    strcpy(arglist[0],choice);
+    arglist[1]=NULL;
     if(strstr(choice,"exit") !=0 ){
       //  printf("debug\n");
         flag++;                     //the flag is to check if the entered command is valid or not
@@ -134,52 +136,37 @@ void theBeginning(int N){
        // ret=spawn("ps",tempArgList);
         printList(head); 
         flag++;
+        theBeginning();
     }
     if(strstr(choice,"clear") != 0)
         foobar();
     if(strstr(choice,"kill") != 0){
         flag++;
         wrapperForKill(atoi(choice+5),&head);
+        theBeginning();
     }
     if(strstr(choice,"\n") != 0){
         flag++;
 }
-    for(i=0;i<N;i++){
-        if(strstr(choice,s[i].command)!=0){
-            ret=spawn(s[i].command,s[i].arglist);
-           
-            insertProcess(&head,s[i].command,ret);
-            flag++;
-        }
-    }
+
+    ret=spawn(choice,arglist);
+    insertProcess(&head,choice,ret);
+    flag++;
+
+    
     if(!flag)
         printf("Invalid Command: Try again\n");
 
-    theBeginning(N);
+    theBeginning();
 }
 int main(){
     char **args =(char **)malloc(MAX_APPS*sizeof(char *));
     int i,c;
     static int j=0;
     pid_t process;
-    int numberOfApps;
-    char *initProgram="";
-    char *initArglist[] ={""};
-    char *AppNumber = (char *)malloc(sizeof(char)*2);
-    printf("Enter the number of apps\n");
-    numberOfApps=atoi(fgets(AppNumber,2,stdin));
-    for(i=0;i<numberOfApps;i++){
-        s[i].command=(char *)malloc(sizeof(char)*MAX_LEN_APPS);
-        scanf("%s",s[i].command);
-    }
-    for(i=0;i<numberOfApps;i++){
-        s[i].arglist=(char **)malloc(sizeof(char *) * 10);
-        s[i].arglist[0]=s[i].command;
-        s[i].arglist[1]=NULL;
-    }
     while ( (c = getchar()) != '\n' && c != EOF );
    // printf("hello");
-    theBeginning(numberOfApps);
+    theBeginning();
 }
 
 
