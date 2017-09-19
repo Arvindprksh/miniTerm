@@ -63,6 +63,8 @@ void clean_up_child_process (int signal_number)
     wait (&status);
     /* Store its exit status in a global variable.*/
     child_exit_status = status;
+    printf("K.O\n");
+    theBeginning();
 }
 
 int spawn (char* program, char** arg_list)
@@ -73,6 +75,7 @@ int spawn (char* program, char** arg_list)
     
     child_pid = fork (); 
     if (child_pid != 0){
+        printf("child is called");
         struct sigaction sigchld_action;
         memset (&sigchld_action, 0, sizeof (sigchld_action));
         sigchld_action.sa_handler = &clean_up_child_process;
@@ -114,16 +117,20 @@ void wrapperForKill(int pid,ProcessList **head){
 void theBeginning(){
 
     int status,i,ret;
+    char c;
     int flag=0,child_status;
     static int skip;
     char *PID=(char *) malloc(sizeof(char) * 10);
     char *choice =(char *)malloc(sizeof(char)*MAX_LEN_APPS);
     strcpy(choice,"");
+    printf("%s",choice);
     //char choice[20];
-    printf("\e[38;2;241;196;15mWhat do you want to do next?\e[0m"); //rgb(241, 196, 15)
+    printf("\e[38;2;241;196;15mWhat do you want to do next\e[0m"); //rgb(241, 196, 15)
     fflush(stdout);
-   // scanf("%s",choice);
+   //printf("hello world1\n");
+    //scanf("%s",choice);
     fgets(choice,20,stdin);
+    //printf("hello world2\n");
     if(strstr(choice,"exit") !=0 ){
       //  printf("debug\n");
         flag++;                     //the flag is to check if the entered command is valid or not
@@ -141,26 +148,29 @@ void theBeginning(){
     else if(strstr(choice,"kill") != 0){
         flag++;
         wrapperForKill(atoi(choice+5),&head);
+        //wrapperForKill(atoi(choice),&head);
         //theBeginning();
     }
-    else if(strcmp(choice,"\n") == 0){
+        else if(strcmp(choice,"\n") == 0){
         flag++;
         //theBeginning();
     }
-    
     else{
         for(i=0;i<numberOfApps;i++){
+            printf("%s",s[i].command);
             if(strstr(choice,s[i].command)!=0){
                 ret=spawn(s[i].command,s[i].arglist);
-
+                //printf("hello world5\n");
                 insertProcess(&head,s[i].command,ret);
+               // printf("hello world6\n");
                 flag++;
             }
         }
     }
+    
     if(!flag)
         printf("Invalid Command: Try again\n");
-
+    printf("hello world7\n");
     theBeginning();
 }
 int main(){
