@@ -59,12 +59,12 @@ void foobar(){}
 void clean_up_child_process (int signal_number)
 {
     /* Clean up the child process. */
-    int status;
-    wait (&status);
+    int status,pid;
+    pid = wait (&status);
     /* Store its exit status in a global variable.*/
     child_exit_status = status;
-    printf("K.O\n");
-    theBeginning();
+    //printf("%d is K.O\n",pid);
+    //theBeginning();
 }
 
 int spawn (char* program, char** arg_list)
@@ -75,14 +75,15 @@ int spawn (char* program, char** arg_list)
     
     child_pid = fork (); 
     if (child_pid != 0){
-        printf("child is called");
-        struct sigaction sigchld_action;
-        memset (&sigchld_action, 0, sizeof (sigchld_action));
-        sigchld_action.sa_handler = &clean_up_child_process;
-        sigaction (SIGCHLD, &sigchld_action, NULL);
-        return child_pid;
+        //struct sigaction sigchld_action;
+        //memset (&sigchld_action, 0, sizeof (sigchld_action));
+       // sigchld_action.sa_handler = &clean_up_child_process;
+       // sigaction (SIGCHLD, &sigchld_action, NULL);
+        signal(SIGCHLD,clean_up_child_process);
+       return child_pid;
     }
     else {
+        printf("child is called");
         int fd = open("file", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
         dup2(fd,1);
         dup2(fd,2);
